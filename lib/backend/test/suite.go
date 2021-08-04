@@ -692,11 +692,11 @@ func (s *BackendSuite) Mirror(c *check.C, b backend.Backend) {
 		c.Fatalf("Timeout waiting for event.")
 	}
 
-	// Add item to backend with a 1 second TTL.
+	// Add item to backend which expires immediately.
 	item := &backend.Item{
 		Key:     prefix("a"),
 		Value:   []byte("val"),
-		Expires: time.Now().Add(1 * time.Second),
+		Expires: time.Now(),
 	}
 	_, err = b.Put(ctx, *item)
 	c.Assert(err, check.IsNil)
